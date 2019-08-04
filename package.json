@@ -1,0 +1,16 @@
+{
+  "name": "audio-stuff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "stern-shawn <stern.shawn@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/webaudioapi": "^0.0.27",
+    "parcel-bundler": "^1.12.3",
+    "ts-node": "^8.3.0",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "start": "parcel index.html"
+  }
+}
