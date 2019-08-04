@@ -1,7 +1,18 @@
 html {
   height: 100%;
   display: flex;
+  background: #1d1e22;
+  color: white;
 }
 body {
   margin: auto;
+}
+.visualizer {
+  display: block;
+  width: 10vmin;
+  height: 50vmin;
+  background: orange;
+  transform-origin: bottom center;
+  margin: auto;
+  transform: scaleY(var(--level, 0.1));
 }
