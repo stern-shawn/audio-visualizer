@@ -9,20 +9,28 @@ const analyserNode = new AnalyserNode(audioCtx, {
   smoothingTimeConstant: 0.8,
 })
 
+const volume = <HTMLElement>document.getElementById('volume')
+const elVisualizer = <HTMLElement>document.querySelector('.visualizer')
+
+const elNodes = Array.from({ length: numNodes }, (v, i) => {
+  const node = document.createElement('div')
+  node.className = 'node'
+  elVisualizer.appendChild(node)
+
+  return node
+})
+
 const updateVisualizer = () => {
   requestAnimationFrame(updateVisualizer)
-
-  const volume = <HTMLElement>document.getElementById('volume')
-  const elVisualizer = <HTMLElement>document.querySelector('.visualizer')
 
   // Put FFT frequency data into our array
   analyserNode.getByteFrequencyData(data)
 
-  const scaledAmplitude = data[0] / 255
-
-  // Render the amplitude of current audio stream
-  volume.textContent = `${Math.round(scaledAmplitude * 10) / 10}`
-  elVisualizer.style.setProperty('--level', `${scaledAmplitude}`)
+  elNodes.forEach((node, i) => {
+    // Render the amplitude of current frequency and tint color
+    node.style.setProperty('--color', `${data[i]}`)
+    node.style.setProperty('--level', `${data[i] / 255}`)
+  })
 }
 
 // Initiate the process of prompting the user for permission to access their audio, creating a 'source', and feeding

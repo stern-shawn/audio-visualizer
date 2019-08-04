@@ -4,16 +4,26 @@ html {
   background: #1d1e22;
   color: white;
 }
+
 body {
   margin: auto;
   text-align: center;
 }
+
 .visualizer {
-  display: block;
-  width: 10vmin;
+  display: flex;
+  width: 100vw;
   height: 50vmin;
-  background: orange;
+}
+
+.node {
+  display: block;
+  flex: 1 1 auto;
+  width: 5rem;
+  height: 50vmin;
+  margin: 5px;
+  background: rgb(var(--color, 0), 155, 50);
   transform-origin: bottom center;
-  margin: auto;
   transform: scaleY(var(--level, 0.1));
+  box-sizing: border-box;
 }
