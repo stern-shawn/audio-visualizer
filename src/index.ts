@@ -18,11 +18,11 @@ const updateVisualizer = () => {
   // Put FFT frequency data into our array
   analyserNode.getByteFrequencyData(data)
 
-  const scaledAmplitude = `${data[0] / 255}`
+  const scaledAmplitude = data[0] / 255
 
   // Render the amplitude of current audio stream
-  volume.textContent = scaledAmplitude
-  elVisualizer.style.setProperty('--level', scaledAmplitude)
+  volume.textContent = `${Math.round(scaledAmplitude * 10) / 10}`
+  elVisualizer.style.setProperty('--level', `${scaledAmplitude}`)
 }
 
 // Initiate the process of prompting the user for permission to access their audio, creating a 'source', and feeding

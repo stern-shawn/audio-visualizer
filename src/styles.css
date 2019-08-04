@@ -6,6 +6,7 @@ html {
 }
 body {
   margin: auto;
+  text-align: center;
 }
 .visualizer {
   display: block;
