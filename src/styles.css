@@ -3,6 +3,7 @@ html {
   display: flex;
   background: #1d1e22;
   color: white;
+  font-family: cursive;
 }
 
 body {
@@ -10,20 +11,40 @@ body {
   text-align: center;
 }
 
+#volume {
+  margin: 2rem;
+}
+
 .visualizer {
   display: flex;
   width: 100vw;
-  height: 50vmin;
+  height: 75vmin;
+  padding: 5px;
+  box-sizing: border-box;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 700px;
 }
 
 .node {
-  display: block;
-  flex: 1 1 auto;
   width: 5rem;
-  height: 50vmin;
-  margin: 5px;
+  height: 100%;
+  flex: 1 1 auto;
+  background: orange;
   background: rgb(var(--color, 0), 155, 50);
   transform-origin: bottom center;
-  transform: scaleY(var(--level, 0.1));
-  box-sizing: border-box;
+  margin: 5px;
+
+  transform: translateZ(calc((1 - var(--level, 0)) * -200px))
+    scaleY(calc((var(--level, 0) * 0.75) + 0.05));
+
+  animation: scale-in 1s ease-out forwards;
+  animation-timing-function: cubic-bezier(0.6, 0, 0.2, 1.5);
+  animation-duration: calc(1s + (var(--i) * 0.05s));
+}
+
+@keyframes scale-in {
+  from {
+    transform: translateZ(calc((var(--level, 0)) * -200px)) scaleY(1);
+  }
 }

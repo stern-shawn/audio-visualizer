@@ -12,9 +12,10 @@ const analyserNode = new AnalyserNode(audioCtx, {
 const volume = <HTMLElement>document.getElementById('volume')
 const elVisualizer = <HTMLElement>document.querySelector('.visualizer')
 
-const elNodes = Array.from({ length: numNodes }, (v, i) => {
+const elNodes = Array.from({ length: numNodes }, (_, i) => {
   const node = document.createElement('div')
   node.className = 'node'
+  node.style.setProperty('--i', `${i}`)
   elVisualizer.appendChild(node)
 
   return node
@@ -29,7 +30,8 @@ const updateVisualizer = () => {
   elNodes.forEach((node, i) => {
     // Render the amplitude of current frequency and tint color
     node.style.setProperty('--color', `${data[i]}`)
-    node.style.setProperty('--level', `${data[i] / 255}`)
+    // Attempt a log-ish scale for sensitivity to higher registers as they drop off
+    node.style.setProperty('--level', `${(data[i] / 255) * (1 + i / numNodes)}`)
   })
 }
 
